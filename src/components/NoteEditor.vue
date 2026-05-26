@@ -108,9 +108,11 @@ watch(
     if (note) {
       title.value = note.title
       content.value = note.content
+      tagInput.value = ''
     } else {
       title.value = ''
       content.value = ''
+      tagInput.value = ''
     }
   },
   { immediate: true }

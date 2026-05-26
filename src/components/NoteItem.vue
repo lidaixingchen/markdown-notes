@@ -14,13 +14,14 @@
 
     <!-- Tags -->
     <div v-if="note.tags.length > 0" class="flex flex-wrap gap-1 mb-2">
-      <span
+      <button
         v-for="tag in note.tags"
         :key="tag"
-        class="inline-block px-1.5 py-0.5 text-[10px] font-medium border-2 border-[#1C293C] bg-[#432DD7] text-white"
+        class="inline-block px-1.5 py-0.5 text-[10px] font-medium border-2 border-[#1C293C] bg-[#432DD7] text-white cursor-pointer hover:bg-[#FDC800] hover:text-[#1C293C] transition-colors"
+        @click.stop="store.setSelectedTag(tag)"
       >
         {{ tag }}
-      </span>
+      </button>
     </div>
 
     <!-- Date -->
