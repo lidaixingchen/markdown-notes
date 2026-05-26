@@ -2,13 +2,14 @@
   <div
     class="flex h-screen bg-[#FBFBF9] relative"
     @dragover="onDragOver"
+    @dragenter="onDragEnter"
     @dragleave="onDragLeave"
     @drop="onDrop"
   >
     <!-- Drag overlay -->
     <div
-      v-if="isDragging"
-      class="absolute inset-0 z-50 bg-[#FDC800]/80 border-4 border-dashed border-[#1C293C] flex items-center justify-center"
+      v-if="dragCounter > 0"
+      class="absolute inset-0 z-50 bg-[#FDC800]/80 border-4 border-dashed border-[#1C293C] flex items-center justify-center pointer-events-none"
     >
       <p class="text-2xl font-bold text-[#1C293C]">释放以导入 Markdown 文件</p>
     </div>
@@ -59,21 +60,25 @@ import { useNoteStore } from './stores/noteStore'
 
 const isLeftCollapsed = ref(false)
 const store = useNoteStore()
-const isDragging = ref(false)
+const dragCounter = ref(0)
 
 function onDragOver(e: DragEvent) {
   e.preventDefault()
-  isDragging.value = true
+}
+
+function onDragEnter(e: DragEvent) {
+  e.preventDefault()
+  dragCounter.value++
 }
 
 function onDragLeave(e: DragEvent) {
   e.preventDefault()
-  isDragging.value = false
+  dragCounter.value--
 }
 
 function onDrop(e: DragEvent) {
   e.preventDefault()
-  isDragging.value = false
+  dragCounter.value = 0
   const files = e.dataTransfer?.files
   if (!files) return
   for (let i = 0; i < files.length; i++) {

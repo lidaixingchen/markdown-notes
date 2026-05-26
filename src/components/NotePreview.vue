@@ -65,11 +65,56 @@ watch(
 </script>
 
 <style scoped>
-.preview-content :deep(h1),
-.preview-content :deep(h2),
-.preview-content :deep(h3),
-.preview-content :deep(h4),
-.preview-content :deep(h5),
+.preview-content :deep(h1) {
+  font-weight: 700;
+  color: #1C293C;
+  border-bottom: 2px solid #1C293C;
+  padding-bottom: 0.3em;
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  font-size: 1.75rem;
+}
+
+.preview-content :deep(h2) {
+  font-weight: 700;
+  color: #1C293C;
+  border-bottom: 2px solid #1C293C;
+  padding-bottom: 0.3em;
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  font-size: 1.5rem;
+}
+
+.preview-content :deep(h3) {
+  font-weight: 700;
+  color: #1C293C;
+  border-bottom: 2px solid #1C293C;
+  padding-bottom: 0.3em;
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  font-size: 1.25rem;
+}
+
+.preview-content :deep(h4) {
+  font-weight: 700;
+  color: #1C293C;
+  border-bottom: 2px solid #1C293C;
+  padding-bottom: 0.3em;
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  font-size: 1.125rem;
+}
+
+.preview-content :deep(h5) {
+  font-weight: 700;
+  color: #1C293C;
+  border-bottom: 2px solid #1C293C;
+  padding-bottom: 0.3em;
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  font-size: 1rem;
+}
+
 .preview-content :deep(h6) {
   font-weight: 700;
   color: #1C293C;
@@ -77,30 +122,10 @@ watch(
   padding-bottom: 0.3em;
   margin-top: 1.5em;
   margin-bottom: 0.75em;
-}
-
-.preview-content :deep(h1) {
-  font-size: 1.75rem;
-}
-
-.preview-content :deep(h2) {
-  font-size: 1.5rem;
-}
-
-.preview-content :deep(h3) {
-  font-size: 1.25rem;
-}
-
-.preview-content :deep(h4) {
-  font-size: 1.125rem;
-}
-
-.preview-content :deep(h5) {
-  font-size: 1rem;
-}
-
-.preview-content :deep(h6) {
   font-size: 0.875rem;
+}
+
+.preview-content :deep(p) {
 }
 
 .preview-content :deep(p) {
@@ -157,10 +182,20 @@ watch(
 .preview-content :deep(ol) {
   margin-bottom: 1em;
   padding-left: 1.5em;
+  list-style: revert;
+}
+
+.preview-content :deep(ul) {
+  list-style-type: disc;
+}
+
+.preview-content :deep(ol) {
+  list-style-type: decimal;
 }
 
 .preview-content :deep(li) {
   margin-bottom: 0.25em;
+  display: list-item;
 }
 
 .preview-content :deep(table) {
@@ -174,7 +209,21 @@ watch(
 .preview-content :deep(td) {
   border: 2px solid #1C293C;
   padding: 0.5em 0.75em;
+}
+
+.preview-content :deep(th),
+.preview-content :deep(td) {
   text-align: left;
+}
+
+.preview-content :deep(th[align="center"]),
+.preview-content :deep(td[align="center"]) {
+  text-align: center;
+}
+
+.preview-content :deep(th[align="right"]),
+.preview-content :deep(td[align="right"]) {
+  text-align: right;
 }
 
 .preview-content :deep(th) {
