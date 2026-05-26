@@ -15,28 +15,72 @@ function saveNotes(notes: Note[]) {
 
 export const useNoteStore = defineStore('notes', () => {
   const notes = ref<Note[]>(loadNotes())
+  const searchQuery = ref('')
+  const selectedTag = ref<string | null>(null)
+  const activeNoteId = ref<string | null>(null)
 
-  const allNotes = computed(() =>
-    [...notes.value].sort((a, b) =>
-      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  const allTags = computed(() => {
+    const tagSet = new Set<string>()
+    notes.value.forEach((n) => n.tags.forEach((t) => tagSet.add(t)))
+    return Array.from(tagSet)
+  })
+
+  const filteredNotes = computed(() => {
+    let result = notes.value
+
+    if (selectedTag.value) {
+      result = result.filter((n) => n.tags.includes(selectedTag.value!))
+    }
+
+    if (searchQuery.value.trim()) {
+      const q = searchQuery.value.toLowerCase()
+      result = result.filter(
+        (n) =>
+          n.title.toLowerCase().includes(q) ||
+          n.content.toLowerCase().includes(q)
+      )
+    }
+
+    return result.sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     )
+  })
+
+  const activeNote = computed(() =>
+    notes.value.find((n) => n.id === activeNoteId.value)
   )
 
-  function addNote(title: string, content: string) {
+  function setActiveNote(id: string | null) {
+    activeNoteId.value = id
+  }
+
+  function setSearchQuery(query: string) {
+    searchQuery.value = query
+  }
+
+  function setSelectedTag(tag: string | null) {
+    selectedTag.value = tag
+  }
+
+  function addNote(title: string, content: string, tags: string[] = []) {
     const note: Note = {
       id: crypto.randomUUID(),
       title,
       content,
+      tags,
       createdAt: new Date().toISOString(),
     }
     notes.value.unshift(note)
     saveNotes(notes.value)
+    activeNoteId.value = note.id
+    return note
   }
 
-  function updateNote(id: string, title: string, content: string) {
+  function updateNote(id: string, updates: Partial<Omit<Note, 'id' | 'createdAt'>>) {
     const index = notes.value.findIndex((n) => n.id === id)
     if (index !== -1) {
-      notes.value[index] = { ...notes.value[index], title, content }
+      notes.value[index] = { ...notes.value[index], ...updates }
       saveNotes(notes.value)
     }
   }
@@ -44,7 +88,23 @@ export const useNoteStore = defineStore('notes', () => {
   function deleteNote(id: string) {
     notes.value = notes.value.filter((n) => n.id !== id)
     saveNotes(notes.value)
+    if (activeNoteId.value === id) {
+      activeNoteId.value = notes.value[0]?.id ?? null
+    }
   }
 
-  return { notes: allNotes, addNote, updateNote, deleteNote }
+  return {
+    notes: filteredNotes,
+    allTags,
+    activeNote,
+    activeNoteId,
+    searchQuery,
+    selectedTag,
+    setActiveNote,
+    setSearchQuery,
+    setSelectedTag,
+    addNote,
+    updateNote,
+    deleteNote,
+  }
 })

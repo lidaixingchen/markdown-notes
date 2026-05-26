@@ -1,6 +1,40 @@
 @import "tailwindcss";
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
 body {
   margin: 0;
   min-height: 100vh;
+  background-color: #FBFBF9;
+  font-family: 'Inter', sans-serif;
+  color: #1C293C;
+}
+
+/* Neobrutalism scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FBFBF9;
+  border-left: 2px solid #1C293C;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1C293C;
+  border: 2px solid #1C293C;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #432DD7;
+}
+
+::-webkit-scrollbar-corner {
+  background: #FBFBF9;
+}
+
+/* Mono font utility */
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
 }

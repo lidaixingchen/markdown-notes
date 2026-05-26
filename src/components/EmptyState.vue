@@ -1,0 +1,25 @@
+<template>
+  <div class="flex flex-col items-center justify-center h-full px-6 text-center">
+    <div class="mb-4">
+      <svg
+        class="w-16 h-16 text-[#1C293C]"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="square"
+          stroke-linejoin="miter"
+          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+        />
+      </svg>
+    </div>
+    <p class="text-base font-medium text-[#1C293C]">
+      还没有笔记，点击上方按钮创建
+    </p>
+  </div>
+</template>
+
+<script setup lang="ts">
+</script>
